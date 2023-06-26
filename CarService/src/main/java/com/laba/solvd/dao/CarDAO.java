@@ -62,8 +62,9 @@ public class CarDAO implements ICarDAO{
     }
 
     @Override
-    public void create(Car car) {
+    public Car create(Car car) {
 
+        return car;
     }
 
 //    @Override

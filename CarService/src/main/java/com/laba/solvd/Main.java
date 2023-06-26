@@ -1,6 +1,7 @@
 package com.laba.solvd;
 
 
+import com.laba.solvd.dao.CarDAO;
 import com.laba.solvd.dao.CustomerDAO;
 import com.laba.solvd.model.Car;
 import com.laba.solvd.model.Customer;
@@ -14,7 +15,8 @@ public class Main {
     public static void main(String[] args) {
 
         CustomerDAO customerDAO = new CustomerDAO();
-        CarServiceImpl carServiceImpl = new CarServiceImpl();
+        CarDAO carDAO = new CarDAO();
+        CarServiceImpl carServiceImpl = new CarServiceImpl(carDAO);
 
         CustomerServiceImpl customerService = new CustomerServiceImpl(customerDAO, carServiceImpl);
 

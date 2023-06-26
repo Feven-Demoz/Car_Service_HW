@@ -4,6 +4,6 @@ import java.util.List;
 public interface ICarDAO {
     void update (Car car);
     Car getById(int id);
-     void create (Car car);
+     Car create (Car car);
    // List<Car> getAll();
 }

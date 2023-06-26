@@ -7,7 +7,7 @@ import com.laba.solvd.dao.CarDAO;
 import com.laba.solvd.service.CarServiceImpl;
 import java.util.List;
 
-public class CustomerServiceImpl implements ICustomerDAO {
+public class CustomerServiceImpl implements ICustomerServiceImpl {
     private CustomerDAO customerDAO;
     private CarServiceImpl carServiceImpl;
 
@@ -17,19 +17,28 @@ public class CustomerServiceImpl implements ICustomerDAO {
     }
 
     @Override
-      public void create(Customer customer){
-    //public Customer create(Customer customer) {
+
+    public Customer create(Customer customer) {
         customer.setId(null);
         customerDAO.create(customer);
         if (customer.getCars() != null) {
             for (Car car : customer.getCars()) {
-               Car createdCar = CarServiceImpl.create(car);
+               Car createdCar = createCar(car);
                 CarDAO.setCar(createdCar, customer);
             }
         }
 
-        //return customer;
+        return customer;
     }
+
+   private Car createCar(Car car) {
+       return car;
+   }
+
+    @Override
+        public List<Customer> getAll () {
+            return customerDAO.getAll();
+        }
 
     @Override
     public void delete(Customer customer) {
@@ -40,12 +49,7 @@ public class CustomerServiceImpl implements ICustomerDAO {
     public List<Customer> findAll() {
         return null;
     }
-
-    @Override
-        public List<Customer> getAll () {
-            return customerDAO.getAll();
-        }
-    }
+}
 
 //
 //    @Override

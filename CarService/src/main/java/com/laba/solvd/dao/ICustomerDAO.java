@@ -11,9 +11,4 @@ public interface ICustomerDAO {
 
     List<Customer> getAll();
 }
-//public interface ICustomerDAO {
-//    void addCustomer(Customer customer);
-//    Customer getCustomer(int customerId);
-//    void updateCustomer(Customer customer);
-//    void deleteCustomer(int customerId);
-//}
+

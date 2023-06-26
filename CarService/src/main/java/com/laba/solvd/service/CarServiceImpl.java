@@ -1,33 +1,42 @@
 package com.laba.solvd.service;
 
+import com.laba.solvd.dao.CarDAO;
 import com.laba.solvd.dao.ICarDAO;
 import com.laba.solvd.model.Car;
+import com.laba.solvd.model.Customer;
 
-public class CarServiceImpl {
-    private ICarDAO CarDAO;
+import java.util.List;
+public class CarServiceImpl implements ICarServiceImpl {
+    private CarDAO carDAO;
 
-    public CarServiceImpl() {
-        ICarDAO carDAO;
-        //CarDAO = carDAO;
+    public CarServiceImpl(CarDAO carDAO) {
+        this.carDAO = carDAO;
     }
 
-    public static Car create(Car car) {
+    public  Car createCar (Car car) {
 
-        return car;
+        if (car.getMake() == null || car.getMake().isEmpty()) {
+            throw new IllegalArgumentException("Car make is required");
+        }
+        return carDAO.create(car);
+        //return CarServiceImpl.create(car);
     }
 
-    public void updateCar(Car car) {
-        CarDAO.update(car);
+    @Override
+    public Car create(Car car) {
+        return null;
     }
 
-    public Car getCarById(int id) {
-        return CarDAO.getById(id);
+    @Override
+    public void update(Car car) {
+
     }
 
-   // public List<Car> getAllCars() {
-
-
-      //  return carDAO.getAll();
-   // }
+    @Override
+    public Car getById(int id) {
+        return null;
+    }
 }
+
+
 
