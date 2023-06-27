@@ -18,7 +18,6 @@ public class CarDAO implements ICarDAO{
     public static void setCar(Car createdCar, Customer customer) {
     }
 
-    //private final String sqlGetAll = "SELECT * FROM cars";
     @Override
     public void update(Car car) {
         Connection connection = CONNECTION_POOL.getConnection();

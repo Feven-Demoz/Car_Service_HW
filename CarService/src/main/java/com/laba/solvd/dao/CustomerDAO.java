@@ -1,5 +1,6 @@
 package com.laba.solvd.dao;
 import com.laba.solvd.dao.configration.ConnectionPool;
+import com.laba.solvd.model.Car;
 import com.laba.solvd.model.Customer;
 
 import java.sql.Connection;
@@ -29,9 +30,34 @@ public class CustomerDAO implements ICustomerDAO {
             preparedStatement.setString(3, customer.getPhoneNumber());
             preparedStatement.setString(4, customer.getAddress());
 
+
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             while (resultSet.next()) {
                 customer.setId(resultSet.getInt("id"));
+                preparedStatement = connection.prepareStatement("insert into cars (id,license_plate, make, year) values(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                List<Car> carList = customer.getCars();
+                PreparedStatement finalPreparedStatement = preparedStatement;
+                carList.forEach((car) ->
+                        {
+                            try {
+                                finalPreparedStatement.setInt(1, resultSet.getInt("id"));
+                                finalPreparedStatement.setString(2, car.getLicensePlate());
+                                finalPreparedStatement.setString(3, car.getMake());
+                                finalPreparedStatement.setInt(4, car.getYear());
+
+
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                );
+
+
+                customer.setCars(carList);
+                preparedStatement.executeQuery();
+                finalPreparedStatement.executeQuery();
+
+
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error executing SQL statement", e);

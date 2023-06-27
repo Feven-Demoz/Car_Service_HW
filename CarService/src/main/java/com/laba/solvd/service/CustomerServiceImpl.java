@@ -21,15 +21,10 @@ public class CustomerServiceImpl implements ICustomerServiceImpl {
     public Customer create(Customer customer) {
         customer.setId(null);
         customerDAO.create(customer);
-        if (customer.getCars() != null) {
-            for (Car car : customer.getCars()) {
-               Car createdCar = createCar(car);
-                CarDAO.setCar(createdCar, customer);
-            }
+        return customer;
+
         }
 
-        return customer;
-    }
 
    private Car createCar(Car car) {
        return car;
@@ -51,29 +46,4 @@ public class CustomerServiceImpl implements ICustomerServiceImpl {
     }
 }
 
-//
-//    @Override
-//    public void addCustomer(Customer customer) {
-//        customerDAO.addCustomer(customer);
-//    }
-//
-//    @Override
-//    public Customer getCustomer(int customerId) {
-//        return null;
-//    }
-//    //    @Override
-////    public Customer getCustomer(int customerId) {
-////        return customerDAO.getCustomer(customerId);
-////    }
-//
-//    @Override
-//    public void updateCustomer(Customer customer) {
-//        customerDAO.updateCustomer(customer);
-//    }
-//
-//    @Override
-//    public void deleteCustomer(int customerId) {
-//        customerDAO.deleteCustomer(customerId);
-//    }
-//}
 
